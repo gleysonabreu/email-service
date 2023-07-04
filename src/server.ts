@@ -1,18 +1,13 @@
 import fastify from 'fastify';
 
-import { config } from './config/env';
+function buildServer() {
+  const server = fastify();
 
-const server = fastify();
+  server.get('/', async (_request, _reply) => {
+    return 'hello world';
+  });
 
-server.get('/', async (_request, _reply) => {
-  return 'hello world';
-});
+  return server;
+}
 
-server.listen({ port: config.PORT }, (err, address) => {
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
-
-  console.log(`Server listening on ${address}`);
-});
+export default buildServer;
