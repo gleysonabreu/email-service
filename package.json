@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/handlebars": "^4.1.0",
     "@types/node": "^20.3.3",
+    "@types/nodemailer": "^6.4.8",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "eslint-config-prettier": "^8.8.0",
@@ -18,9 +20,12 @@
     "typescript": "*"
   },
   "dependencies": {
+    "bull": "^4.10.4",
     "dotenv": "^16.3.1",
     "eslint": "^8.0.1",
     "fastify": "^4.19.2",
+    "handlebars": "^4.7.7",
+    "nodemailer": "^6.9.3",
     "tsx": "^3.12.7"
   },
   "scripts": {
