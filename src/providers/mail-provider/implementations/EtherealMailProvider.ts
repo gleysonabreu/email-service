@@ -24,7 +24,7 @@ class EtherealMailProvider implements MailProvider {
         this.client = transporter;
       })
       .catch((err) => {
-        console.error(err);
+        throw new Error(err);
       });
   }
 
@@ -34,7 +34,9 @@ class EtherealMailProvider implements MailProvider {
     variables: any,
     path: string,
   ): Promise<void> {
-    const templateFileContent = fs.readFileSync(path).toString('utf-8');
+    const templateFileContent = (await fs.promises.readFile(path)).toString(
+      'utf-8',
+    );
     const templateParse = handlebars.compile(templateFileContent);
     const html = templateParse(variables);
 

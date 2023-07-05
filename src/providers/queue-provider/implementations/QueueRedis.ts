@@ -1,7 +1,7 @@
 import Queue from 'bull';
 
 import { config } from '../../../config/env';
-import EtherealMailProvider from '../../mail-provider/index';
+import MailProvider from '../../mail-provider/index';
 import { type AddProps, type QueueProvider } from '../queue-provider';
 
 export class QueueRedis implements QueueProvider {
@@ -18,7 +18,7 @@ export class QueueRedis implements QueueProvider {
     });
 
     this.queue.process(async (job) =>
-      EtherealMailProvider.sendMail(
+      MailProvider.sendMail(
         job.data.to,
         job.data.subject,
         job.data.variables,
