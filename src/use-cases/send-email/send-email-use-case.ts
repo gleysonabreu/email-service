@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 
+import { type Either, right } from '../../errors/Either';
 import { type QueueProvider } from '../../providers/queue-provider/queue-provider';
 
 interface Request {
@@ -8,10 +9,16 @@ interface Request {
   passwordEncrypted: string;
 }
 
+type Response = Either<Error, Record<string, unknown>>;
+
 export class SendEmailUseCase {
   constructor(private readonly queue: QueueProvider) {}
 
-  async execute({ password, passwordEncrypted, to }: Request) {
+  async execute({
+    password,
+    passwordEncrypted,
+    to,
+  }: Request): Promise<Response> {
     const templateFile = resolve(
       __dirname,
       '..',
@@ -35,5 +42,7 @@ export class SendEmailUseCase {
     };
 
     await this.queue.add(data);
+
+    return right({});
   }
 }

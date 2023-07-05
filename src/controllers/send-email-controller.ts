@@ -13,7 +13,14 @@ export class SendEmailController {
   ) {
     const { to, password, passwordEncrypted } = request.body;
 
-    await this.sendEmailUseCase.execute({ to, password, passwordEncrypted });
+    const result = await this.sendEmailUseCase.execute({
+      to,
+      password,
+      passwordEncrypted,
+    });
+
+    if (result.isLeft()) return reply.code(400).send(result.value);
+
     return reply.code(204).send();
   }
 }
