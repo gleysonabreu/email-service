@@ -5,7 +5,9 @@ import cors, { type FastifyCorsOptions } from '@fastify/cors';
 import { sendEmailRoutes } from './routes/send-email';
 
 function buildServer() {
-  const server = fastify();
+  const server = fastify({
+    logger: true,
+  });
 
   const corsOptions: FastifyCorsOptions = {
     credentials: true,
