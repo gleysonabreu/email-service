@@ -2,6 +2,7 @@ import fastify from 'fastify';
 
 import cors, { type FastifyCorsOptions } from '@fastify/cors';
 
+import { config } from './config/env';
 import { sendEmailRoutes } from './routes/send-email';
 
 function buildServer() {
@@ -11,7 +12,13 @@ function buildServer() {
 
   const corsOptions: FastifyCorsOptions = {
     credentials: true,
-    origin: process.env.CORS_ORIGIN,
+    origin: (origin, callback) => {
+      if (origin?.includes(config.CORS_ORIGIN)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed'), false);
+      }
+    },
   };
 
   server.register(cors, corsOptions);
