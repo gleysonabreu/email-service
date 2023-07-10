@@ -1,3 +1,3 @@
-import { EtherealMailProvider } from './implementations/EtherealMailProvider';
+import { GMailMailProvider } from './implementations/GmailMailProvider';
 
-export default new EtherealMailProvider();
+export default new GMailMailProvider();
