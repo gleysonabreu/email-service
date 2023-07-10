@@ -31,12 +31,16 @@ class GMailMailProvider implements MailProvider {
     const templateParse = handlebars.compile(templateFileContent);
     const html = templateParse(variables);
 
-    await this.client?.sendMail({
-      to,
-      from: 'Ciphery <noreplay@ciphery.vercel.app>',
-      subject,
-      html,
-    });
+    try {
+      await this.client?.sendMail({
+        to,
+        from: 'Ciphery <noreplay@ciphery.vercel.app>',
+        subject,
+        html,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
