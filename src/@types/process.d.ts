@@ -6,5 +6,9 @@ declare namespace NodeJS {
     REDIS_PASSWORD: string;
     REDIS_USERNAME: string;
     CORS_ORIGIN: string;
+    GMAIL_USER: string;
+    GMAIL_PASS: string;
+    GMAIL_HOST: string;
+    GMAIL_PORT: number;
   }
 }
